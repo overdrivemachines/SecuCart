@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %} SecuCart home {% endblock %}
+
+{% block content %}
+
+<div class="jumbotron">
+  <h1>SecuCart</h1>
+  <p class="lead">
+    Welcome to SecuCart, the most securest of all shopping carts on teh webs.
+  </p>
+  {% if user.is_authenticated %}
+    <p>Welcome {{user}}</p>
+  {% else %}  
+    <p><a class="btn btn-lg btn-success" href="login?next='index'" role="button">Log in</a></p>
+  {% endif %}  
+</div>
+
+{% endblock %}
