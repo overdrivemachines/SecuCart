@@ -20,18 +20,19 @@ def render_template(request, template, context):
     context = RequestContext(request, context)
     return template.render(context)
 
-
 def home(request):
-	return HttpResponse(render_template(request, 'SecuCart/home.html', {}))
-
+    return HttpResponse(render_template(request, 'SecuCart/home.html', {}))
 
 def inventory(request):
-    items = Item.objects.all()
-	return HttpResponse(render_template(request, 'SecuCart/inventory.html', {'items': items}))
+    i = Item.objects.all()
+    items = []
+    for item in i:
+        items.append(item)
+    print items
+    return HttpResponse(render_template(request, 'SecuCart/inventory.html', {'items': items}))
 
 def shopping_cart(request):
     return HttpResponse(render_template(request, 'SecuCart/shopping_cart.html', {'items': items}))
-
 
 def login(request):
     context = RequestContext(request)

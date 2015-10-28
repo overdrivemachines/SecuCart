@@ -1,18 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app='app' ng-controller='main'>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
+    {% load staticfiles %}
+
     <title> {% block title %} SecuCart {% endblock %}</title>
     <!-- Bootstrap core CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-    <!-- jQuery -->    
-    <script src="assets/js/jquery-2.1.4.min.js"></script>
-    <script src="assets/js/angular.min.js"></script>
-    <link rel="stylesheet" href="assets/css/jquery-ui.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="{% static "assets/css/bootstrap.min.css" %}" rel="stylesheet">
+    <!-- jQuery -->  
+    <script src="{% static "assets/js/jquery-2.1.4.min.js"%}"></script>
+
+    <script src="{% static "assets/js/angular.min.js"%}"></script>  
+    <script src="{% static "assets/js/app.js"%}"></script>
+    
+    <link rel="stylesheet" href="{% static "assets/css/jquery-ui.css" %}">
+    <link rel="stylesheet" href="{% static "assets/css/styles.css" %}">
 
   </head>
   <body role="document" class="day">
@@ -49,7 +54,7 @@
           <div class="alert {% if message.tags %} {{ message.tags }} {% else %} alert-info {% endif %}" role="alert">{{ message }}</div>
           {% endfor %}
       {% endif %}
-      
+
       {% block content %}   
 
       {% endblock %}
