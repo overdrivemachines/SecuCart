@@ -1,7 +1,29 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %}{}
 
+
+{% block content %}
+
+<br>
+<br>
+<br>
+<br>
 <div>
-    {% for product in cart.products %}
-        {{ product.name }}
-    {% endfor %}
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+        </tr>
+        
+        {% for i in cart.items %}
+        <tr>
+            <td>{{ i.product.name }}</td>
+            <td>{{ i.quantity }}</td>
+        </tr>
+        {% endfor %}
+        
+    </table>
+
+    <a href="#" class="btn-success">Check Out</a>
 </div>
+
+{% endblock %}

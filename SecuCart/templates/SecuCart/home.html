@@ -11,10 +11,6 @@
   <p class="lead">
     Welcome to SecuCart, the most securest of all shopping carts on teh webs.
   </p>
-  <p><a class="btn btn-lg btn-success" href="#" role="button" ng-click='setInv(true)'>Inventory</a></p>
-  <p><a class="btn btn-lg btn-success" href="#" role="button" ng-click='setInv(false)'>Shopping Cart</a></p>
-  <div ng-include="{% static "assets/partials/inventory.html "%}" ng-show='inventory'></div> 
-  <div ng-include="{% static "assets/partials/shopping_cart.html "%}" ng-show='!inventory'></div>
   {% if user.is_authenticated %}
     <p>Welcome {{user}}</p>
   {% else %}  

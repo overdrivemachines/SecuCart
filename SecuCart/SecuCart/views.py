@@ -26,22 +26,34 @@ def render_template(request, template, context):
 def home(request):
     return HttpResponse(render_template(request, 'SecuCart/home.html', {}))
 
+@csrf_exempt
 def inventory(request):
-    i = Item.objects.all()
-    items = []
-    for item in i:
-        items.append(item)
-    print items
-    return HttpResponse(render_template(request, 'SecuCart/inventory.html', {'items': items}))
+    if request.method == 'GET':
+        i = Item.objects.all()
+        items = []
+        for item in i:
+            print item.name, item.description
+            items.append(item)
+        return HttpResponse(render_template(request, 'SecuCart/inventory.html', { 'items': items }))
+
+    elif request.method == 'POST':
+        print 'item_number:', request.POST.get('item_number')
+        for i in request.POST:
+            if i != 'item_number':
+                item = Item.objects.get(name=i)
+                print 'item:', i, item.name, item.quantity, item.price
+                item.quantity = item.quantity - int(request.POST.get('item_number'))
+                item.save()
+                cart = Cart(request.session)
+                cart.add(item, price=1.0, quantity=request.POST.get('item_number'))           
+                return HttpResponse(render_template(request, 'SecuCart/shopping_cart.html', {}))
+
 
 def shopping_cart(request):
-    return HttpResponse(render_template(request, 'SecuCart/shopping_cart.html', {'items': items}))
-
-def add(request):
     cart = Cart(request.session)
-    item = Item.objects.get(id=request.GET.get('item_id'))
-    cart.add(item, price=item.price)
-    return HttpResponse("Added")
+    return HttpResponse(render_template(request, 'SecuCart/shopping_cart.html', {'cart': cart}))
+
+
 
 
 

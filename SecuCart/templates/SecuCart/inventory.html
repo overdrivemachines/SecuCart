@@ -1,3 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<br>
+<br>
+<br>
+<br>
 <div>
 	<table>
 		<tr>
@@ -10,7 +16,12 @@
 			<td>{{item.name}}</td>
 			<td>{{item.description}}</td>
 			<td>{{item.quantity}}</td>
+			<form action="/inventory/" method="POST">
+				<td><input type="number" name="item_number"></td>
+				<td><input type="submit" name="{{item.name}}"value="Add to Cart"></td>
+			</form>
 		</tr>
 		{% endfor %}
 	</table>
 </div>
+{%endblock%}

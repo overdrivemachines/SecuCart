@@ -60,6 +60,8 @@ ROOT_URLCONF = 'SecuCart.urls'
 
 WSGI_APPLICATION = 'SecuCart.wsgi.application'
 
+CART_PRODUCT_MODEL = 'SecuCart.models.Item'
+
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
