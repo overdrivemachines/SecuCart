@@ -8,12 +8,15 @@ from django.core.context_processors import csrf
 from django.views.decorators.csrf import csrf_exempt
 from django.core.files import File
 
+from carton.cart import Cart
+from models import Item
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-from models import Item
+
 
 def render_template(request, template, context):
     template = loader.get_template(template)
@@ -33,6 +36,14 @@ def inventory(request):
 
 def shopping_cart(request):
     return HttpResponse(render_template(request, 'SecuCart/shopping_cart.html', {'items': items}))
+
+def add(request):
+    cart = Cart(request.session)
+    item = Item.objects.get(id=request.GET.get('item_id'))
+    cart.add(item, price=item.price)
+    return HttpResponse("Added")
+
+
 
 def login(request):
     context = RequestContext(request)

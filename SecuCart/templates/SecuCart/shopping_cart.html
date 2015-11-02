@@ -1,20 +1,7 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
-{% block title %} SecuShoppingCart {% endblock %}
-
-{% block content %}
-<table>
-	<tr>
-		<th>Name</th>
-		<th>Description</th>
-		<th>Quantity</th>
-	</tr>
-	{% for item in items %}
-	<tr>
-		<td>{{item.name}}</td>
-		<td>{{item.description}}</td>
-		<td>{{item.quantity}}</td>
-	</tr>
-	{% endfor %}
-
-{% endblock %}
+<div>
+    {% for product in cart.products %}
+        {{ product.name }}
+    {% endfor %}
+</div>
